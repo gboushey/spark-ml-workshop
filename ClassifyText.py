@@ -5,8 +5,13 @@ from pyspark.ml.classification import LogisticRegression
 import pyspark.sql.functions as F
 import pyspark.sql.types as T
 
+# Use a local context if you are not on a cluster
 sc = SparkContext('local')
 spark = SparkSession(sc)
+
+# use this for cluster
+#sc = pyspark.SparkContext()
+#spark = pyspark.sql.SparkSession(sc)
 
 df = spark.read.format("csv").option("inferschema","true").option("header", "true").option("delimiter", "\t").load("trainReviews.tsv")
 
